@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: int = 35
+@export var speed: int = 45
 @onready var animations = $AnimationPlayer
 @onready var sprite = $Sprite2D
 
@@ -11,22 +11,16 @@ func handleInput():
 func updateAnimation():
 	
 	if velocity.length() == 0:
-		animations.stop()
-		return
-		
-	var direction = "Down"
+		animations.play("idle")
 	
-	if velocity.x < 0:
-		direction = "Left" 
-		sprite.flip_h = true
+	else: 
+		if velocity.x < 0:
+			sprite.flip_h =true;
 		
-	elif velocity.x > 0: 
-		direction = "Right"
-		sprite.flip_h = false
+		elif velocity.x > 0: 
+			sprite.flip_h = false
 		
-	elif velocity.y < 0: direction = "Up"
-	
-	animations.play("walkRight")
+		animations.play("walkRight")
 	
 	
 func _physics_process(delta):
